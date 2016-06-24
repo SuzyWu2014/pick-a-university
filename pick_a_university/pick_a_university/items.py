@@ -8,7 +8,7 @@
 from scrapy.item import Item, Field
 
 
-class PickAUniversityItem(Item):
+class ScoreLineItem(Item):
     # define the fields for your item here like:
     province = Field()
     year = Field()
