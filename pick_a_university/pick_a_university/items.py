@@ -15,3 +15,24 @@ class ScoreLineItem(Item):
     stu_type = Field()
     grade_level = Field()
     score_line = Field()
+
+
+class UniversityScoreItem(Item):
+    """
+    university: Unversity Name
+    stu_src:
+    stu_type:
+    year:
+    grade_level:
+    avg_score:
+    score_line:
+    score_diff:
+    """
+    university = Field()
+    stu_src = Field()
+    stu_type = Field()
+    year = Field()
+    grade_level = Field()
+    avg_score = Field()
+    score_line = Field()
+    score_diff = Field()

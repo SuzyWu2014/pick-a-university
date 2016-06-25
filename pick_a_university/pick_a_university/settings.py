@@ -13,7 +13,7 @@ BOT_NAME = 'pick_a_university'
 
 SPIDER_MODULES = ['pick_a_university.spiders']
 NEWSPIDER_MODULE = 'pick_a_university.spiders'
-
+SPLASH_URL = 'http://192.168.99.100:8050/'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'pick_a_university (+http://www.yourdomain.com)'
@@ -52,10 +52,16 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'pick_a_university.middlewares.MyCustomDownloaderMiddleware': 543,
-#}
 
+DOWNLOADER_MIDDLEWARES = {
+    # 'pick_a_university.middlewares.MyCustomDownloaderMiddleware': 543,
+    'scrapy_splash.SplashCookiesMiddleware': 723,
+    'scrapy_splash.SplashMiddleware': 725,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+}
+
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
@@ -64,9 +70,11 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'pick_a_university.pipelines.SomePipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'pick_a_university.pipelines.StuSrcPipiline': 300,
+    'pick_a_university.pipelines.ScoreDiffPipeline': 350,
+    'pick_a_university.pipelines.JsonWriterPipeline': 400,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

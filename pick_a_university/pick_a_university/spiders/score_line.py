@@ -45,12 +45,3 @@ class ScoreLineSpider(scrapy.spiders.Spider):
         if curr_page < pages_count:
             url = 'http://www.gaokaopai.com/fenshuxian-sct-3-st-2-bt-1-year-%s-p-%s.html' % (curr_year, str(curr_page + 1))
             yield scrapy.Request(url, callback=self.parse)
-
-
-class UniversityScoreSpider(scrapy.spiders.Spider):
-    name = 'university_score'
-    allowed_domains = ['gkcx.eol.cn']
-    start_urls = ['http://gkcx.eol.cn/soudaxue/queryProvinceScore.html?page=1&recomschtype=%E6%99%AE%E9%80%9A%E6%9C%AC%E7%A7%91&recomluqupici=%E4%B8%80%E6%89%B9&scoreSign=3&schoolSort=7']
-
-    def parse(self, response):
-        pass
