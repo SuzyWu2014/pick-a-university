@@ -18,7 +18,7 @@ class ScoreDiffPipeline(object):
 
     def process_item(self, item, spider):
         score_diff = int(item['score_diff'])
-        if score_diff > 30 and score_diff < 120:
+        if score_diff > 0 and score_diff < 250:
             return item
         else:
             raise DropItem("score_diff not matched!")
@@ -37,7 +37,7 @@ class JsonExportPipeline(object):
         return pipeline
 
     def spider_opened(self, spider):
-        file = open('%s.json' % spider.name, 'w+b')
+        file = open('%s_all.json' % spider.name, 'w+b')
         self.files[spider] = file
         self.exporter = JsonLinesItemExporter(file, encoding='utf-8', ensure_ascii=False)
         self.exporter.start_exporting()

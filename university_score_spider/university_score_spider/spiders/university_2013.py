@@ -14,7 +14,7 @@ def update_dict(params_dict, key, value):
 class University2013Spider(scrapy.spiders.Spider):
     name = 'university_2013'
     allowed_domains = ['gkcx.eol.cn']
-    params = {'page': 4, 'recomschtype': '普通本科', 'recomluqupici': '一批', 'scoreSign': 3, 'schoolSort': 7, 'recomyear': 2013, 'argprovince': '福建', 'argluqutype': '理科'}
+    params = {'page': 1, 'recomschtype': '普通本科', 'recomluqupici': '一批', 'scoreSign': 3, 'schoolSort': 7, 'recomyear': 2013, 'argprovince': '福建', 'argluqutype': '理科'}
     base_url = 'http://gkcx.eol.cn/soudaxue/queryProvinceScore.html?%s'
     start_urls = [base_url % urllib.urlencode(params)]
 
@@ -53,7 +53,7 @@ class University2013Spider(scrapy.spiders.Spider):
         else:
             yield SplashRequest(response.url, self.parse, endpoint='render.html',
                                 args={'wait': 0.5})
-        if curr_page < 14:
+        if curr_page < 22:
             self.params['page'] = curr_page + 1
             url = self.base_url % urllib.urlencode(self.params)
             splash_args = {

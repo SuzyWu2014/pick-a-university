@@ -53,7 +53,7 @@ class University2015Spider(scrapy.spiders.Spider):
         else:
             yield SplashRequest(response.url, self.parse, endpoint='render.html',
                                 args={'wait': 0.5})
-        if curr_page < 10:
+        if curr_page < 13:
             self.params['page'] = curr_page + 1
             url = self.base_url % urllib.urlencode(self.params)
             splash_args = {
