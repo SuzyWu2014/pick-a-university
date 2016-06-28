@@ -4,6 +4,9 @@ from pprint import pprint
 
 
 def create_df_university_scores():
+    '''
+    convert json data into pandas dataframe, and sort the data by unversity-year
+    '''
     df_university = pandas.read_json("university_scores_2011_2015.json", orient='records')
     df_university = df_university.sort_values(['university', 'year'], ascending=[0, 1]).drop_duplicates()[['university', 'year', 'score_line', 'avg_score', 'score_diff']]
     return df_university
