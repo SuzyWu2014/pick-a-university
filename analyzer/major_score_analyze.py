@@ -14,10 +14,7 @@ def group_major():
 
 
 def merge_ranking(df_major):
-    print df_major.head()
     df_ranking = pandas.read_csv('data/scores_ranking_2013_2015.csv', encoding='utf-8')
-    print df_ranking.head()
-    # df_ranking['year'] = df_ranking['year'].astype(numpy.int32)
     df_major = df_major.merge(df_ranking, how='left', left_on=['year', 'avg_major_score'], right_on=['year', 'grade']).drop('grade', axis=1).fillna(0)
     return df_major
 
