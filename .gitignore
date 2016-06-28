@@ -1,1 +1,5 @@
 pick_a_university.old/*
+.DS_Store
+*/*/*.pyc
+*/*/.DS_Store
+*/*/*/*.pyc
