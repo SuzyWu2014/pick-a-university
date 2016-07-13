@@ -47,9 +47,13 @@ def merge985_211(df_university):
     list_985 = list_985['985']
     list_211 = list_211['211']
     df_university['is_985'] = numpy.where(
-        df_university['university'].isin(list_985), '985', 'not_985')
+        df_university['university'].isin(list_985), 1, 0)
     df_university['is_211'] = numpy.where(
-        df_university['university'].isin(list_211), '211', 'not_211')
+        df_university['university'].isin(list_211), 1, 0)
+    # df_university['is_985'] = numpy.where(
+    #     df_university['university'].isin(list_985), '985', 'not_985')
+    # df_university['is_211'] = numpy.where(
+    #     df_university['university'].isin(list_211), '211', 'not_211')
     return df_university
 
 
@@ -77,15 +81,14 @@ def count_admission(df_university):
         'report/admission_count_2012_2013.csv', encoding="utf-8", index=False)
 
 
-# def show_985_scores():
+def merge_all():
+    df_university = create_df_university_scores()
+    # df_university = merge_ranking(df_university)
+    df_university = merge985_211(df_university)
+    df_university = merge_admission(df_university)
+    return df_university
 
 
 if __name__ == '__main__':
-    df_university = create_df_university_scores()
-    df_university = merge_ranking(df_university)
-    df_university = merge985_211(df_university)
-    df_university = merge_admission(df_university)
-    print df_university
-    # count_admission(df_university)
-    # export_to_csv(
-    # df_university, 'report/all_university_scores_with_ranking.csv')
+    df_university = merge_all()
+    df_university.to_csv("report/all_univesity.csv", encoding="utf-8", index=False)
